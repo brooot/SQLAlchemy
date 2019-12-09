@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div>
+        <form action="/modify" method="post">
+            <p>
+                name : <input name="uname" type="text" value="{{ params.user.username }}">
+            </p>
+            <p>
+                name : <input name="uage" type="number" value="{{ params.user.age }}">
+            </p>
+            <p>
+                name : <input name="uemail" type="email" value="{{ params.user.email }}">
+            </p>
+            {#  id 隐藏域 #}
+            <p>
+                <input name="id" type="hidden" value={{ params.user.id }}>
+            </p>
+            <button type="submit">修改</button>
+        </form>
+
+    </div>
+</body>
+</html>

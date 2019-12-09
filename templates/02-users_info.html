@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>所有用户信息</title>
+    <style>
+        body{
+            font-family: sans-serif;
+        }
+        table, th, td{
+            border: 2px solid brown;
+            text-align: center;
+        }
+        div, table{
+            margin: 0 auto;
+        }
+        td{
+            margin: 0;
+        }
+        table{
+            border-collapse: collapse;
+            background-color: chocolate;
+        }
+        a{
+            text-decoration: none;
+        }
+        a:link{
+            color: navy;
+        }
+        a:visited{
+            color: navy;
+        }
+        a:hover{
+            color: lawngreen;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8" async defer>
+        if ("{{ params.headers['Referer'] }}" === "{{ 'http://' + '127.0.0.1:5000' + url_for('register') }}"){
+                alert("恭喜!您已注册成功!")
+            }
+        if ("{{ params.headers['Referer'] }}" === "{{ 'http://' + '127.0.0.1:5000' + url_for('delete_by_id_views') }}"){
+                alert("删除成功!")
+            }
+        console.log("referer : {{params.headers['Referer'] }}")
+
+
+        function remove(name,id) {
+            var ack = window.confirm("确认删除" + name + "?")
+            if (ack){
+                {#alert("删除id = " + id + "的数据")#}
+                location.href = "/delete_by_id?id=" + id;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <p>
+            <a href="/">返回主页</a>
+        </p>
+    </div>
+    <table >
+        <thead>
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>邮箱</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for u in params.users %}
+        <tr>
+            <td><a href="/query_by_id/{{ u.id }}">{{ u.username }}</a></td>
+            <td>{{ u.age }}</td>
+            <td>{{ u.email }}</td>
+            <td>
+{#                <a href="/delete_by_id?id={{ u.id }}">删除</a>#}
+                <a href="javascript:remove('{{u.username}}','{{ u.id }}')">删除</a>
+                <a href="/modify?id={{ u.id }}">修改</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

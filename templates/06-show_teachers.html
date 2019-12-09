@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>所有教师信息</title>
+    <style>
+        body{
+            font-family: sans-serif;
+        }
+        table, th, td{
+            border: 2px solid brown;
+            text-align: center;
+        }
+        div, table{
+            margin: 0 auto;
+        }
+        td{
+            margin: 0;
+        }
+        table{
+            border-collapse: collapse;
+            background-color: chocolate;
+        }
+        a{
+            text-decoration: none;
+        }
+        a:link{
+            color: navy;
+        }
+        a:visited{
+            color: navy;
+        }
+        a:hover{
+            color: lawngreen;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8" async defer>
+        {#if ("{{ params.headers['Referer'] }}" === "{{ 'http://' + '127.0.0.1:5000' + url_for('register') }}"){#}
+        {#        alert("恭喜!您已注册成功!")#}
+        {#    }#}
+        {#if ("{{ params.headers['Referer'] }}" === "{{ 'http://' + '127.0.0.1:5000' + url_for('delete_by_id_views') }}"){#}
+        {#        alert("删除成功!")#}
+        {#    }#}
+        {#console.log("referer : {{params.headers['Referer'] }}")#}
+        {##}
+        {##}
+        {#function remove(name,id) {#}
+        {#    var ack = window.confirm("确认删除" + name + "?")#}
+        {#    if (ack){#}
+                {#alert("删除id = " + id + "的数据")#}
+        {#        location.href = "/delete_by_id?id=" + id;#}
+        {#    }#}
+        {# }#}
+    </script>
+</head>
+<body>
+    <div>
+        <p>
+            <a href="/">返回主页</a> &nbsp <a href="/add_teacher">添加教师</a>
+        </p>
+    </div>
+    <table >
+        <thead>
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>教授课程</th>
+            <th>修改授课内容</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for t in params.teachers %}
+        <tr>
+            <td>{{ t.tname }}</td>
+            <td>{{ t.tage }}</td>
+            {% if t.course %}
+                <td><a href="/show_courses">{{ t.course.cname }}</a></td>
+            {% else %}
+                <td>无</td>
+            {% endif %}
+            <td>
+                <form action="/show_teachers", method="post">
+                    <input type="hidden" name="t_id" value="{{ t.id }}">
+                    <label for="COURSE">授课课程</label>
+                    <select name="c_id" id="COURSE">
+                        <option value="null">无</option>
+                        {% for c in params.courses %}
+                            {% if t.course.id == c.id %}
+                                <option value="{{ c.id }}" selected="selected">{{ c.cname }}</option>
+                            {% else %}
+                                <option value="{{ c.id }}">{{ c.cname }}</option>
+                            {% endif %}
+                        {% endfor %}
+                </select>
+                <button type="submit">提交修改</button>
+                </form>
+
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

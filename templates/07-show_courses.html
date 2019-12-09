@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: sans-serif;
+        }
+        table, th, td{
+            border: 2px solid brown;
+            text-align: center;
+        }
+        div, table{
+            margin: 0 auto;
+        }
+        td{
+            margin: 0;
+        }
+        table{
+            border-collapse: collapse;
+            background-color: chocolate;
+        }
+        a{
+            text-decoration: none;
+        }
+        a:link{
+            color: navy;
+        }
+        a:visited{
+            color: navy;
+        }
+        a:hover{
+            color: lawngreen;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>
+            <a href="/">返回主页</a> &nbsp <a href="/add_course">添加课程</a>
+        </p>
+    </div>
+    <table >
+        <thead>
+            <tr>
+                <th>课程名称</th>
+                <th>开课老师</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in params.courses %}
+                <tr>
+                    <td>{{ c.cname }}</td>
+                     <td>
+                         &nbsp
+                        {% for t in c.teachers %}
+                            <a href="/show_teachers">{{ t.tname }} &nbsp</a>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

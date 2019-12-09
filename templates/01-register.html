@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+    <link rel="stylesheet" href="">
+    <style type="text/css" media="screen">
+        #c1:hover{
+            background-color: lightgreen;
+            border-color: lightgreen;
+            color: yellow;
+            width: 80px;
+            height: 30px;
+
+        }
+        #c1{
+            border-radius: 8px;
+            border-color: lightpink;
+            background-color: lightpink;
+            text-align: center;
+            color: white;
+            transition: all .3s ease-in-out;
+
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p><a href="/">返回主页</a></p>
+    </div>
+	<form action="/register" method="post">
+    <p>
+        Name: <input type="text" name="uname">
+    </p>
+    <p>
+        Age: <input type="number" name="uage">
+    </p>
+    <p>
+        Email: <input type="email" name="uemail">
+    </p>
+    <p>
+        <button id='c1' type="submit" >注册</button>
+    </p>
+</form>
+</body>
+</html>
